@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/TemplatePrincipal.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{msgUI['addRep.title']}"/>
+            </ui:define>
+            <ui:define name="content">
+                <h4 class="center-align title">
+                    <h:outputText value="#{msgUI['addRep.title']}" 
+                                  id="titulo" />
+                </h4>
+                <h:form id="formAdd">
+                    <p:messages id="globalMSG" 
+                                for="globalMSG"
+                                showDetail="true"
+                                closable="false"
+                                autoUpdate="false"/>
+                    <div class="row">
+                        <div class="col s12 l2 center-align">
+                            <i class="fas fa-user large grey-text"></i><br/>
+                            <span class="center-align">
+                                <p:commandLink value="#{msgUI['addRep.image']}"/>
+                            </span>
+                        </div>
+                        <div class="col s12 l10 ">
+                            <p:fieldset legend="#{msgUI['addRep.fieldSet']}">
+                                <div class="row">
+                                    <div class="input-field col l4">
+                                        <h:outputLabel for="name"
+                                                       styleClass="required"
+                                                       value="#{msgUI['addRep.name']}"/>
+                                        <p:inputText id="name" 
+                                                     required="true"
+                                                     value="#{addRepMB
+                                                              .representanteDTO
+                                                              .entidad.nombre}"/>
+                                        <p:message for="name"/>
+                                    </div>
+                                    <div class="input-field col l4">
+                                        <h:outputLabel for="ap1"
+                                                       styleClass="required"
+                                                       value="#{msgUI['addRep.ap1']}"/>
+                                        <p:inputText id="ap1" 
+                                                     required="true"
+                                                     value="#{addRepMB.representanteDTO
+                                                              .entidad.apellido1}"/>
+                                        <p:message for="ap1"/>
+                                    </div>
+                                    <div class="input-field col l4">
+                                        <h:outputLabel for="ap2"
+                                                       value="#{msgUI['addRep.ap2']}"/>
+                                        <p:inputText id="ap2" 
+                                                     value="#{addRepMB.representanteDTO
+                                                              .entidad.apellido2}"/>
+                                        <p:message for="ap2"/>
+                                    </div>
+                                    <div class="input-field col l4">
+                                        <h:outputLabel for="nEmp"
+                                                       styleClass="required"
+                                                       value="#{msgUI['addRep.numE']}"/>
+                                        <p:inputText id="nEmp" 
+                                                     required="true"
+                                                     value="#{addRepMB.representanteDTO
+                                                              .entidad.numeroempleado}"/>
+                                        <p:message for="nEmp"/>
+                                    </div>
+                                    <div class="input-field col l4">
+                                        <h:outputLabel for="tel"
+                                                       styleClass="required"
+                                                       value="#{msgUI['addRep.tel']}"/>
+                                        <p:inputText id="tel" 
+                                                     required="true"
+                                                     value="#{addRepMB.representanteDTO
+                                                              .entidad.telefono}"/>
+                                        <p:message for="tel"/>
+                                    </div>
+                                    <div class="input-field col l4">
+                                        <h:outputLabel for="mail"
+                                                       styleClass="required"
+                                                       value="#{msgUI['addRep.mail']}"/>
+                                        <p:inputText id="mail" 
+                                                     required="true"
+                                                     value="#{addRepMB.representanteDTO
+                                                              .entidad.correoelectronico}"/>
+                                        <p:message for="mail"/>
+                                    </div>
+                                </div>
+                                <div class="input-field col l4">
+                                    <h:outputLabel for="user"
+                                                   styleClass="required"
+                                                   value="#{msgUI['addRep.user']}"/>
+                                    <p:inputText id="user" 
+                                                 required="true"
+                                                 value="#{addRepMB.representanteDTO
+                                                          .entidad.usuario}"/>
+                                    <p:message for="user"/>
+                                </div>
+                                <div class="input-field col l4">
+                                    <h:outputLabel for="pass"
+                                                   styleClass="required"
+                                                   value="#{msgUI['addRep.pass']}"/>
+                                    <p:password id="pass" 
+                                                 required="true"
+                                                 value="#{addRepMB.representanteDTO
+                                                          .entidad.contraseña}"/>
+                                    <p:message for="pass"/>
+                                </div>
+                                <div class="input-field col l4 s12  black-text" style="padding-top: 1em;">
+                                    <h:selectOneMenu value ="#{addRepMB
+                                                               .representanteDTO
+                                                               .idInstitution}"
+                                                     required="true"
+                                                     id="selectInst"> 
+                                        <f:selectItem itemDisabled="true"
+                                                      itemLabel="Institucion asociada"/>
+                                        <f:selectItems value="#{administratorMB.
+                                                                administradorLogin.
+                                                                entidad.institucionList}"
+                                                       var="institucion"
+                                                       itemLabel="#{institucion.acronimo}"
+                                                       itemValue="#{institucion.id}"/>
+                                    </h:selectOneMenu> 	
+                                    <p:message for="selectInst"/>
+                                </div>
+                            </p:fieldset>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 l3 offset-l4 iconheight center-align childrenHeight">
+                            <p:commandLink action="#{addRepMB.add()}"
+                                           class="black-text"
+                                           ajax="false"
+                                           update="formAdd">
+                                <i class="fas fa-save small icon"></i><br/>
+                                <h:outputText value="#{msgUI['addRep.add']}"/>
+                            </p:commandLink>
+                        </div>
+                        <div class="col s12 l3  iconheight center-align childrenHeight">
+                            <p:commandLink action="#{addRepMB.back()}"
+                                           class="black-text"
+                                           ajax="false"
+                                           immediate="true">
+                                <i class="fas fa-times small icon"></i><br/>
+                            </p:commandLink>
+                            <h:outputText value="#{msgUI['global.cancel']}"/>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

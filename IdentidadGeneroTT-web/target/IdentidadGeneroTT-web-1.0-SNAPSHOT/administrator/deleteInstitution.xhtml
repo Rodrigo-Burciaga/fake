@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/TemplatePrincipal.xhtml">
+            <ui:define name="title">
+                #{msgUI['global.title']}
+            </ui:define>
+            <ui:define name="content">
+                <h4 class="center-align title">
+                    <h:outputText value="#{msgUI['deleteInstitution.title']}" 
+                                  id="titulo" />
+                </h4>
+                <p:messages id="globalMSG" 
+                            for="globalMSG"
+                            showDetail="true"
+                            closable="false"/>
+                <div class="row">
+                    <div class="col l2 s12 center-align">
+                        <i class="fas fa-user large grey-text"></i>
+                    </div>
+                    <div class="col l10 s12 nomargin">
+                        <p:fieldset legend="#{msgUI['detailInstitution.fieldGeneral']}" 
+                                    class="table-cell">
+                            <h:dataTable value="#{institutionsMB.institutionDTO.entidad}"
+                                         styleClass="responsive-table nomargin highlight"
+                                         var="institucion">
+                                <h:column >
+                                    <f:facet name="header">
+                                        #{msgUI['deleteInstitution.acronimo']}
+                                    </f:facet>
+                                    #{institucion.acronimo}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['deleteInstitution.nombre']}
+                                    </f:facet>
+                                    #{institucion.nombre}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{msgUI['deleteInstitution.mail']}"
+                                                      escape="false"/>
+                                    </f:facet>
+                                    <h:outputText value="#{institucion.correoelectronico}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['deleteInstitution.phone']}
+                                    </f:facet>
+                                    #{institucion.telefono}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{msgUI['deleteInstitution.director']}"
+                                                      escape="false"/>
+                                    </f:facet>
+                                    #{institucion.director}
+                                </h:column>
+                            </h:dataTable>
+                        </p:fieldset>
+                        <p:fieldset legend="#{msgUI['deleteInstitution.fieldsetDir']}"
+                                    class="table-cell">
+                            <h:dataTable value="#{institutionsMB.institutionDTO.entidad}"
+                                         var="institucion"
+                                         styleClass="responsive-table nomargin highlight">
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['deleteInstitution.calle']}
+                                    </f:facet>
+                                    #{institucion.calle}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['deleteInstitution.noInt']}
+                                    </f:facet>
+                                    #{empty institucion.numInt ? "s/n": institucion.numInt}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['deleteInstitution.noExt']}
+                                    </f:facet>
+                                    #{empty institucion.numExt ? "s/n": institucion.numInt}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['deleteInstitution.col']}
+                                    </f:facet>
+                                    #{institucion.colonia}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['deleteInstitution.del']}
+                                    </f:facet>
+                                    #{institucion.delegacion}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['deleteInstitution.estado']}
+                                    </f:facet>
+                                    #{institucion.estado}
+                                </h:column>
+                                <h:column >
+                                    <f:facet name="header">
+                                        <h:outputText escape="false" 
+                                                      value="#{msgUI['deleteInstitution.cp']}"/>
+                                    </f:facet>
+                                    #{institucion.cp}
+                                </h:column>
+                            </h:dataTable>
+                        </p:fieldset> 
+                    </div>
+                </div>
+                <h:form id="formDetail">
+                    <div class="row">
+                        <div class="col l2 s12 offset-l5 center-align">
+                            <a class="modal-trigger iconheight" 
+                               href="#modal1"
+                               id="formDetail:delete">
+                                <i class="fas fa-trash-alt icon small black-text"></i> 
+                            </a>
+                            <p:commandLink ajax="false"
+                                           class="iconheight black-text"
+                                           id="delete">
+
+                            </p:commandLink>
+                            <p:tooltip id="toolTipDelete"
+                                       for="delete"
+                                       value="#{msgUI['global.delete']}"
+                                       position="top"/>
+                        </div>
+                        <div class="col l2 s12 iconheight center-align">
+                            <p:commandLink ajax="false"
+                                           action="#{institutionsMB.back()}"
+                                           class="iconheight black-text"
+                                           id="back">
+                                <i class="fas fa-times icon small"></i> 
+                            </p:commandLink>
+                            <p:tooltip id="toolTipBack"
+                                       for="back"
+                                       value="#{msgUI['global.cancel']}"
+                                       position="top"/>
+                        </div>
+                        <div id="modal1" 
+                             class="modal">
+                            <div class="modal-content center-align">
+                                <h4>#{msgUI['deleteInstitution.confirm']}</h4>
+                                <h:outputText value="#{msgUI['deleteInstitution.advertisement']}"/>
+                            </div>
+                            <div class="modal-footer center-align footer-modal" >
+                                <div class="col l3 offset-l3 offset-s3">
+                                    <p:commandLink ajax="false"
+                                                   class="iconheight green-text"
+                                                   id="check"
+                                                   action="#{institutionsMB.delete()}">
+                                        <i class="fas fa-check-circle icon small"></i> 
+                                    </p:commandLink>
+                                    <p:tooltip for="check"
+                                               id="toolTipCcheck"
+                                               value="#{msgUI['global.delete']}"
+                                               position="top"/>
+                                </div>
+                                <div class="col l3">
+                                    <p:commandLink class="iconheight red-text modal-close"
+                                                   id="cancel">
+                                        <i class="fas fa-times-circle icon small"></i> 
+                                    </p:commandLink>
+                                    <p:tooltip for="cancel"
+                                               id="toolTipCancel"
+                                               value="#{msgUI['global.cancel']}"
+                                               position="top"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

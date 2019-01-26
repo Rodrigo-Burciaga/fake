@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Footer</title>
+    </h:head>
+    <h:body>
+        <div class="row ">
+            <div class="col l2 offset-l5 offset-s5 center-align">
+                <p:commandLink action="#{leftBarMB.handleNavigation(component.id)}"
+                               styleClass="black-text"
+                               id="home">
+                    <span class="iconheight">
+                        <i class="fas fa-home small icon"></i>
+                    </span>
+                </p:commandLink>
+                <p:tooltip id="toolTipHome"
+                           for="home"
+                           value="#{msgUI['sidebar.index']}"
+                           position="top"/>
+            </div>
+        </div>
+        <div class="page-footer red darken-4 row" style=" margin-bottom: 0">
+            <div class="container">
+                <div class="row ">
+                    <div class="col l12 s12 center-align">
+                        <h6 class="white-text  "><b>#{msgUI['footer.header']}</b></h6>    
+                    </div>
+                    <div class="col l12 s12 center-align">
+                        #{msgUI['footer.body']}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row grey darken-3 bar" >
+        </div>
+        <div class="page-footer grey row" style=" margin-bottom: 0;padding-bottom: 1em">
+            <div class="container center-align">
+                <b>
+                    #{msgUI['footer.contacto']}<br/>
+                    #{msgUI['footer.names']}<br/>
+                    #{msgUI['footer.mail']}
+                </b>
+
+            </div>
+        </div>
+
+    </h:body>
+</html>
+

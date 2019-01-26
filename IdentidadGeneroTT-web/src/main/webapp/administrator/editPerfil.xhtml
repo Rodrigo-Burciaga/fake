@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/TemplatePrincipal.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{msgUI['global.title']}"/>
+            </ui:define>
+            <ui:define name="content">
+                <h4 class="center-align title">
+                    <h:outputText value="#{msgUI['editPerfil.title']}" 
+                                  id="titulo" />
+                </h4>
+                <h:form id="formAdd">
+                    <p:messages id="globalMSG"
+                                for="globalMSG"
+                                showDetail="true"/>
+                    <div class="row">
+                        <div class="col s12 l2 center-align">
+                            <i class="fas fa-user large grey-text"></i><br/>
+                            <span class="center-align">
+                                <p:commandLink value="#{msgUI['editPerfil.image']}"/>
+                            </span>
+                        </div>
+                        <p:fieldset legend="#{msgUI['editPerfil.fieldsetGeneral']}">
+                            <div class="col s12 l10 ">
+                                <div class="row">
+                                    <div class="input-field col l4 ">
+                                        <h:outputLabel for=":formAdd:name" 
+                                                       value="#{msgUI['editPerfil.name']}"
+                                                       class="required"/>
+                                        <p:inputText id="name"
+                                                     required="true"
+                                                     value="#{administratorMB.administradorLogin.entidad.nombre}"/>
+                                        <p:message for="name"/>
+                                    </div>
+                                    <div class="input-field col l4 ">
+                                        <h:outputLabel for=":formAdd:ap1" 
+                                                       value="#{msgUI['editPerfil.ap1']}"
+                                                       class="required"/>
+                                        <p:inputText id="ap1"
+                                                     required="true"
+                                                     value="#{administratorMB.administradorLogin.entidad.apellido1}"/>
+                                        <p:message for="ap1"/>
+                                    </div>
+                                    <div class="input-field col l4">
+                                        <h:outputLabel for=":formAdd:ap2" 
+                                                       value="#{msgUI['editPerfil.ap2']}"/>
+                                        <p:inputText id="ap2"
+                                                     value="#{administratorMB.administradorLogin.entidad.apellido2}"/>
+                                        <p:message for="ap2"/>
+                                    </div>
+                                    <div class="input-field col l4">
+                                        <h:outputLabel for=":formAdd:noEmp" 
+                                                       value="#{msgUI['editPerfil.employee']}"
+                                                       class="required"/>
+                                        <p:inputText id="noEmp"
+                                                     required="true"
+                                                     value="#{administratorMB.administradorLogin.entidad.numeroempleado}"/>
+                                        <p:message for="noEmp"/>
+                                    </div>
+                                    <div class="input-field col l4">
+                                        <h:outputLabel for=":formAdd:phone" 
+                                                       value="#{msgUI['editPerfil.phone']}"
+                                                       class="required"/>
+                                        <p:inputText id="phone"
+                                                     required="true"
+                                                     value="#{administratorMB.administradorLogin.entidad.telefono}"/>
+                                        <p:message for="phone"/>
+                                    </div>
+                                    <div class="input-field col l4">
+                                        <h:outputLabel for=":formAdd:mail" 
+                                                       value="#{msgUI['editPerfil.mail']}"
+                                                       class="required"/>
+                                        <p:inputText id="mail"
+                                                     required="true"
+                                                     value="#{administratorMB.administradorLogin.entidad.correoelectronico}"/>
+                                        <p:message for="mail"/>
+                                    </div>
+                                    <div class="input-field col l4 ">
+                                        <h:outputLabel for=":formAdd:user" 
+                                                       value="#{msgUI['editPerfil.user']}"
+                                                       class="required"/>
+                                        <p:inputText id="user" 
+                                                     required="true" 
+                                                     value="#{administratorMB.administradorLogin.entidad.usuario}"/>
+                                        <p:message for="user"/>
+                                    </div>
+                                    <div class="input-field col l4">
+                                        <h:outputLabel for=":formAdd:pass" 
+                                                       value="#{msgUI['editPerfil.pass']}" 
+                                                       class="required"/>
+                                        <p:password id="pass"
+                                                    required="true"
+                                                    value="#{administratorMB.administradorLogin.entidad.contraseña}"/>
+                                        <p:message for="pass"/>
+                                    </div>
+                                    <div class="input-field col l4">
+                                        <h:outputLabel for=":formAdd:passR" 
+                                                       value="#{msgUI['editPerfil.repeatPass']}" 
+                                                       class="required"/>
+                                        <p:password id="passR"
+                                                    required="true"
+                                                    value="#{administratorMB.administradorLogin.passRepeated}"/>
+                                        <p:message for="passR"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </p:fieldset>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 l3 offset-l3  iconheight center-align childrenHeight">
+                            <p:commandLink action="#{administratorMB.update()}"
+                                           class="black-text"
+                                           ajax="false">
+                                <i class="fas fa-save small icon"></i><br/>
+                            </p:commandLink>
+                            #{msgUI['global.save']}
+                        </div>
+                        <div class="col s12 l3  iconheight center-align childrenHeight">
+                            <p:commandLink action="#{loginMB.back()}"
+                                           class="black-text"
+                                           ajax="false"
+                                           immediate="true">
+                                <i class="fas fa-times small icon"></i><br/>
+                            </p:commandLink>
+                            #{msgUI['global.cancel']}
+                        </div>
+                    </div>
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

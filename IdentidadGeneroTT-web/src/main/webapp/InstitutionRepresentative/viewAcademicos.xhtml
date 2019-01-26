@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/TemplatePrincipal.xhtml">
+            <ui:define name="title">
+                #{msgUI['global.title']}
+            </ui:define>
+            <ui:define name="content">
+                <h4 class="center-align title">
+                    <h:outputText value="#{msgUI['viewAcademicos.title']}" 
+                                  id="titulo" />
+                </h4>
+                <h:form>
+                    <div class="row">
+                        <div class="col s12 m6 l6">
+                            <div class="input-field col s12  black-text">
+                                <h:selectOneMenu value = " "> 
+                                    <f:selectItem itemValue = "1" 
+                                                  itemLabel = "Jose Jaime Rabadán" /> 
+                                    <f:selectItem itemValue = "2" 
+                                                  itemLabel = "Marco Antonio Moreno Armendáriz" /> 
+                                    <f:selectItem itemValue="3"
+                                                  itemLabel="Carlos Duchanoy" />
+                                    <f:selectItem itemValue="4"
+                                                  itemLabel="Norman Saucedo" />
+                                </h:selectOneMenu> 	
+                            </div>
+                        </div>
+                        <div class="col s4 m2 l2 center-align iconheight">
+                            <p:commandLink action="#{academicosMB.viewDetail()}"
+                                           ajax="false"
+                                           id="view"
+                                           styleClass="black-text">
+                                <i class="fas fa-eye small icon"></i>     
+                            </p:commandLink>
+                            <p:tooltip for="view"
+                                       id="toolTipView"
+                                       value="#{msgUI['viewAcademicos.tooltip.view']}"
+                                       position="top"/>
+                        </div>
+                        <div class="col s4 m2 l2 center-align iconheight">
+                            <p:commandLink action="#{academicosMB.prepareUpdate()}"
+                                           ajax="false"
+                                           id="edit"
+                                           styleClass="black-text">
+                                <i class="fas fa-pencil-alt icon small"></i>
+                            </p:commandLink>
+                            <p:tooltip id="toolTipEdit"
+                                       value="#{msgUI['viewAcademicos.tooltip.edit']}"
+                                       position="top"
+                                       for="edit"/>
+                        </div>
+                        <div class="col s24 m2 l2 center-align iconheight">
+                            <p:commandLink action="#{academicosMB.prepareDelete()}"
+                                           ajax="false"
+                                           id="delete"
+                                           styleClass="black-text">
+                                <i class="fas fa-trash-alt small icon"></i>
+                            </p:commandLink>
+                            <p:tooltip value="#{msgUI['viewAcademicos.tooltip.delete']}"
+                                       for="delete"
+                                       id="toolTipTrash"
+                                       position="top"/>
+                        </div>
+                    </div>
+                    <div class="row no-pad no-margin">
+                        <div class="col s12 m12 l12 center-align iconheight">
+                            <p:commandLink action="#{academicosMB.prepareAdd()}"
+                                           class="black-text"
+                                           ajax="false">
+                                <i class="fas fa-plus-square icon small"
+                                   id="iconAdd"></i>
+                            </p:commandLink>
+
+                        </div>
+                        <div class="col s12 m12 l12 center-align ">
+                            <h:outputText value="#{msgUI['viewAcademicos.add']}"
+                                          id="labelAdd"/>
+                        </div>
+                    </div> 
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

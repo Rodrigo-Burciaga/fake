@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/TemplatePrincipal.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{msgUI['viewAdmin.title']}"/>
+            </ui:define>
+            <ui:define  name="content">
+                <h:form id="formDetail">
+                    <p:messages id="globalMSG"
+                                showDetail="true"
+                                closable="false" 
+                                for="globalMSG"/>
+                    <h4 class="center-align title">
+                        <h:outputText value="#{msgUI['viewAdmin.title']}" 
+                                      id="titulo" />
+                    </h4>
+                    <h:outputText rendered="#{empty catalogMB.administradores}"
+                                  class="center-align empty"
+                                  value="#{msgUI['global.empty']}"/>
+                    <div class="row">
+                        <div class="col s12 m6 l6">
+                            <div class="input-field col s12  black-text">
+                                <h:selectOneMenu value = "#{administratorMB
+                                                            .administradorDTO
+                                                            .entidad.id}"
+                                                 rendered="#{not empty catalogMB.administradores}"> 
+                                    <f:selectItems value="#{catalogMB.administradores}"
+                                                   var="administrador"
+                                                   itemLabel="#{administrador.entidad.usuario}"
+                                                   itemValue="#{administrador.entidad.id}"/>
+                                </h:selectOneMenu> 	
+                            </div>
+                        </div>
+                        <div class="col s4 l2 center-align iconheight offset-s2" >
+                            <p:commandLink action="#{administratorMB.viewDetail()}"
+                                           actionListener="#{administratorMB.find()}"
+                                           rendered="#{not empty catalogMB.administradores}"
+                                           styleClass="black-text"
+                                           id="view"
+                                           ajax="false">
+                                <i class="fas fa-eye small icon"></i>
+                            </p:commandLink>
+                            <p:tooltip id="toolTipView" 
+                                       for="view" 
+                                       value="#{msgUI['viewAdmin.toolTipView']}" 
+                                       position="top"/>
+
+                        </div>
+                        <div class="col s4 l2 center-align iconheight">
+                            <p:commandLink action="#{administratorMB.prepareDelete()}"
+                                           actionListener="#{administratorMB.find()}"
+                                           rendered="#{not empty catalogMB.administradores}"
+                                           styleClass="black-text"
+                                           ajax="false"
+                                           id="delete">
+                                <i class="fas fa-trash-alt small icon"></i>
+                            </p:commandLink>
+                            <p:tooltip id="toolTipTrash" 
+                                       for="delete" 
+                                       value="#{msgUI['viewAdmin.toolTipDelete']}" 
+                                       position="top"/>
+                        </div>
+                    </div>
+                    <div class="row no-pad no-margin">
+                        <div class="col s12 m12 l12 center-align iconheight">
+                            <p:commandLink action="#{administratorMB.prepareAdd()}"
+                                           class="black-text"
+                                           ajax="false"
+                                           id="add">
+                                <i class="fas fa-plus-circle icon small"
+                                   id="iconAdd"></i>
+                            </p:commandLink>
+                            <p:tooltip id="toolTipAdd" 
+                                       for="add" 
+                                       value="#{msgUI['viewAdmin.toolTipAdd']}" 
+                                       position="top"/>
+                        </div>
+                    </div> 
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/TemplatePrincipal.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{msgUI['viewQuestionaries.title']}"/>
+            </ui:define>
+            <ui:define name="content">
+                <h4 class="center-align title">
+                    <h:outputText value="#{msgUI['viewQuestionaries.titleP']}" 
+                                  id="titulo" />
+                </h4>
+                <h:form>
+                    <p:messages for="globalMSG" 
+                                id="globalMSG" 
+                                showDetail="true">
+                        <p:autoUpdate />
+                    </p:messages>
+                    <h:outputText rendered="#{empty representanteMB
+                                              .representanteInstitucionDTO
+                                              .entidad.cuestionarioList}"
+                                  class="center-align empty"
+                                  value="#{msgUI['global.empty']}"/>
+                    <h:outputText rendered="false"
+                                  class="center-align empty"
+                                  value="#{msgUI['global.empty']}"/>
+                    <h:panelGroup layout="block"
+                                  rendered="#{not empty representanteMB
+                                              .representanteInstitucionDTO
+                                              .entidad.cuestionarioList}">
+                        <div class="row">
+                            <div class="col s12 m6 l6">
+                                <div class="input-field col s12  black-text">
+                                    <h:selectOneMenu value ="#{representanteMB
+                                                                .representanteInstitucionDTO
+                                                                .idCuestionario}"> 
+                                        <f:selectItems value="#{representanteMB
+                                                                .representanteInstitucionDTO
+                                                                .entidad.cuestionarioList}"
+                                                       var="cuestionario"
+                                                       itemLabel="#{cuestionario.nombre}"
+                                                       itemValue="#{cuestionario.id}"/>
+                                    </h:selectOneMenu> 	
+                                </div>
+                            </div>
+                            <div class="col s4 m2 l2 center-align iconheight">
+                                <p:commandLink action="#{representanteMB.viewDetail()}"
+                                               actionListener="#{representanteMB.findQuestionary()}"
+                                               ajax="false"
+                                               styleClass="black-text"
+                                               id="view">
+                                    <i class="fas fa-eye small icon"></i>
+                                </p:commandLink>
+                                <p:tooltip value="#{msgUI['viewQuestionaries.tooltipView']}"
+                                           for="view"
+                                           id="toolTipView"
+                                           position="top"/>
+                            </div>
+                            <div class="col s4 m2 l2 center-align iconheight">
+                                <p:commandLink action="#{representanteMB.updateQuestionary()}"
+                                               actionListener="#{representanteMB.findQuestionary()}"
+                                               ajax="false"
+                                               styleClass="black-text"
+                                               id="edit">
+                                    <i class="fas fa-pencil-alt icon small"></i>
+                                </p:commandLink>
+                                <p:tooltip value="#{msgUI['viewQuestionaries.tooltipEdit']}"
+                                           for="edit"
+                                           id="toolTipEdit"
+                                           position="top"/>
+                            </div>
+                            <div class="col s24 m2 l2 center-align iconheight">
+                                <p:commandLink action="#{representanteMB.prepareDeleteQuestionary()}"
+                                               actionListener="#{representanteMB.findQuestionary()}"
+                                               ajax="false"
+                                               styleClass="black-text"
+                                               id="delete">
+                                    <i class="fas fa-trash-alt small icon"></i>
+                                </p:commandLink>
+                                <p:tooltip value="#{msgUI['viewQuestionaries.tooltipDelete']}"
+                                           for="delete"
+                                           id="toolTipDelete"
+                                           position="top"/>
+                            </div>
+                        </div>  
+                    </h:panelGroup>
+                    <div class="row no-pad no-margin">
+                        <div class="col s12 m12 l12 center-align iconheight">
+                            <p:commandLink action="#{questionariesMB.prepareAdd()}"
+                                           class="black-text"
+                                           ajax="false"
+                                           id="add">
+                                <i class="fas fa-plus-circle icon small"
+                                   id="iconAdd"></i>
+                            </p:commandLink>
+                            <p:tooltip value="#{msgUI['viewQuestionaries.add']}"
+                                       for="add"
+                                       id="toolTipAdd"
+                                       position="top"/>
+                        </div>
+                    </div> 
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Left Bar</title>
+    </h:head>
+    <h:body>
+        <h:form id="formLeftBar">
+            <ul id="slide-out" class="side-nav">
+                <i class="fas fa-times icon small closeBtn" onclick="cerrar()"></i>
+                <h3 class="grey-text text-darken-4 center-align ">
+                    #{msgUI["sidebar.title"]}
+                </h3>
+                <div class="collection">
+                    <h:outputText value="#{leftBarMB.actualMenu}"
+                                  id="actualMenu"
+                                  class="hide"/>
+                    <p:commandLink action="#{leftBarMB.handleNavigation(component.id)}"
+                                   value="#{msgUI['sidebar.index']}"
+                                   id="INDEX"
+                                   ajax="false"
+                                   class="collection-item" />
+                    <p:commandLink action="#{leftBarMB.handleNavigation(component.id)}"
+                                   value="#{msgUI['sidebar.login']}"
+                                   id="LOGIN"
+                                   rendered="#{not loginMB.loginDTO.logged}"
+                                   ajax="false"
+                                   class="collection-item" />
+                    <p:commandLink action="#{leftBarMB.handleNavigation(component.id)}"
+                                   actionListener="#{loginMB.formatDate()}"
+                                   value="#{msgUI['sidebar.perfil']}"
+                                   id="PERFIL"
+                                   rendered="#{loginMB.loginDTO.logged}"
+                                   ajax="false"
+                                   class="collection-item" />
+                    <p:commandLink action="#{leftBarMB.handleNavigation(component.id)}"
+                                   value="#{msgUI['sidebar.administradores']}"
+                                   id="ADMINISTRATORS"
+                                   rendered="#{loginMB.loginDTO.logged and
+                                               loginMB.loginDTO.tipoUser == 1}"
+                                   ajax="false"
+                                   class="collection-item" />
+                    <p:commandLink action="#{leftBarMB.handleNavigation(component.id)}"
+                                   value="#{msgUI['sidebar.instituciones']}"
+                                   id="INSTITUTIONS"
+                                   rendered="#{loginMB.loginDTO.logged and
+                                               loginMB.loginDTO.tipoUser == 1}"
+                                   ajax="false"
+                                   class="collection-item" />
+                    <p:commandLink action="#{leftBarMB.handleNavigation(component.id)}"
+                                   value="#{msgUI['sidebar.rep']}"
+                                   id="REPINSTITUCION"
+                                   ajax="false"
+                                   class="collection-item"
+                                   rendered="#{loginMB.loginDTO.logged and
+                                               loginMB.loginDTO.tipoUser == 1}"/>
+                    <p:commandLink action="#{leftBarMB.handleNavigation(component.id)}"
+                                   value="#{msgUI['sidebar.academicos']}"
+                                   id="ACADEMICOS"
+                                   ajax="false"
+                                   class="collection-item"
+                                   rendered="#{loginMB.loginDTO.logged and
+                                               loginMB.loginDTO.tipoUser == 2}"/>
+                    <p:commandLink action="#{leftBarMB.handleNavigation(component.id)}"
+                                   value="#{msgUI['sidebar.cuestionarios']}"
+                                   id="CUESTIONARIOS"
+                                   ajax="false"
+                                   class="collection-item"
+                                   rendered="#{loginMB.loginDTO.logged and
+                                               loginMB.loginDTO.tipoUser == 2}"/>
+                    <p:commandLink action="#{leftBarMB.handleNavigation(component.id)}"
+                                   value="#{msgUI['sidebar.estadisticas']}"
+                                   id="ESTADISTICAS"
+                                   ajax="false"
+                                   class="collection-item"
+                                   rendered="#{loginMB.loginDTO.logged and
+                                               loginMB.loginDTO.tipoUser == 3}"/>
+
+                </div>
+                <div class="csesion fullwidth center-align">
+                    <p:commandLink action="#{leftBarMB.handleNavigation(component.id)}"
+                                   actionListener="#{loginMB.clear()}"
+                                   id="CSESION"
+                                   ajax="false"
+                                   class="btn waves-effect waves-light"
+                                   rendered="#{loginMB.loginDTO.logged}">
+                        <h:outputText value="#{msgUI['sidebar.cSesion']}"/>
+                        <i class="fas fa-sign-out-alt "></i>   
+                    </p:commandLink>
+                </div>
+            </ul>
+            <div class="center-align completeWidth iconheight">
+                <a href=" " 
+                   data-activates="slide-out" 
+                   class="button-collapse">
+                    <i class="fas fa-bars small center-align icon black-text"></i>
+                </a>
+            </div>
+
+
+
+
+        </h:form>
+    </h:body>
+</html>
+

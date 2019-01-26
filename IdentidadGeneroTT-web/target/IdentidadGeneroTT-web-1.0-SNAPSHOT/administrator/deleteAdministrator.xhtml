@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/TemplatePrincipal.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{msgUI['deleteAdmin.title']}"/>
+            </ui:define>
+            <ui:define name="content">
+                <h4 class="center-align title">
+                    <h:outputText value="#{msgUI['deleteAdmin.title']}" 
+                                  id="titulo" />
+                </h4>
+                <h:form id="formDelete">
+                    <h:panelGroup layout="block">
+                        <h:outputText rendered="#{not empty administratorMB
+                                                  .administradorDTO.entidad.fechafin}"
+                                      class="center-align empty"
+                                      value="#{msgUI['deleteAdmin.userOff']}"/>
+                        <div class="row">
+                            <div class="col s12 l12 center-align iconheight" >
+                                <p:commandLink action="#{administratorMB.back()}"
+                                               rendered="#{not empty administratorMB
+                                                  .administradorDTO.entidad.fechafin}"
+                                               styleClass="black-text"
+                                               ajax="false"
+                                               id="view">
+                                    <i class="fas fa-arrow-circle-left small icon"></i>
+                                </p:commandLink>
+                                <p:tooltip id="toolTipView" 
+                                           for="view" 
+                                           value="#{msgUI['global.back']}" 
+                                           position="top"/>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block"
+                                  rendered="#{empty administratorMB
+                                              .administradorDTO.entidad.fechafin}">
+                        <div class="row">
+                            <div class="col s12 l9 offset-l1">
+                                <div class="card horizontal hoverable">
+                                    <div class="card-image">
+                                        <img src="../resources/images/user.png" />
+                                    </div>
+                                    <div class="card-stacked">
+                                        <ul class="collection nomargin" >
+                                            <li class="collection-item">
+                                                <b class="twoDots">
+                                                    <h:outputText value="#{msgUI['detailAdmin.name']}"/>
+                                                </b>
+                                                <h:outputText value="#{administratorMB.administradorDTO.entidad.nombre} " />
+                                                <h:outputText value="#{administratorMB.administradorDTO.entidad.apellido1} "/>
+                                                <h:outputText value="#{administratorMB.administradorDTO.entidad.apellido2}"/>
+                                            </li>
+                                            <li class="collection-item">
+                                                <b class="twoDots">
+                                                    <h:outputText value="#{msgUI['detailAdmin.numEm']}"/>
+                                                </b>
+                                                <h:outputText value="#{administratorMB.administradorDTO.entidad.numeroempleado}"/>
+                                            </li>
+                                            <li class="collection-item">
+                                                <b class="twoDots">
+                                                    <h:outputText value="#{msgUI['detailAdmin.phone']}"/>
+                                                </b>
+                                                <h:outputText value="#{administratorMB.administradorDTO.entidad.telefono}"/>
+                                            </li>
+                                            <li class="collection-item">
+                                                <b class="twoDots">
+                                                    <h:outputText value="#{msgUI['detailAdmin.mail']}"/>
+                                                </b>
+                                                <h:outputText value="#{administratorMB.administradorDTO.entidad.correoelectronico}"/>
+                                            </li>
+                                            <li class="collection-item">
+                                                <b class="twoDots">
+                                                    <h:outputText value="#{msgUI['detailAdmin.dateIn']}"/>
+                                                </b>
+                                                <h:outputText value="#{loginMB.loginDTO.fechaInicio}"/>
+                                            </li>
+                                            <li class="collection-item">
+                                                <b class="twoDots">
+                                                    <h:outputText value="#{msgUI['detailAdmin.user']}"/>
+                                                </b>
+                                                <h:outputText value="#{administratorMB.administradorDTO.entidad.usuario}"/>
+                                            </li>
+                                            <h:panelGroup layout="block" 
+                                                          rendered="#{not empty
+                                                                      administratorMB.administradorDTO.entidad.fechafin}">
+                                                <li class="collection-item">
+                                                    <b class="twoDots">
+                                                        <h:outputText value="#{msgUI['detailAdmin.user']}"/>
+                                                    </b>
+                                                    <h:outputText value="#{loginMB.loginDTO.fechaFin}"/>
+                                                </li>
+                                            </h:panelGroup>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col l2 s12 offset-l4 center-align">
+                                <a class="modal-trigger iconheight" 
+                                   href="#modal1"
+                                   id="formDelete:delete">
+                                    <i class="fas fa-trash-alt icon small black-text"></i> 
+                                </a>
+                                <p:commandLink ajax="false"
+                                               class="iconheight black-text"
+                                               id="delete">
+                                </p:commandLink>
+                                <p:tooltip id="toolTipDelete"
+                                           for="delete"
+                                           value="#{msgUI['viewAdmin.toolTipDelete']}"
+                                           position="top"/>
+                            </div>
+                            <div class="col l2 s12 iconheight center-align">
+                                <p:commandLink ajax="false"
+                                               action="#{administratorMB.back()}"
+                                               class="iconheight black-text"
+                                               id="back">
+                                    <i class="fas fa-times icon small"></i> 
+                                </p:commandLink>
+                                <p:tooltip id="toolTipBack"
+                                           for="back"
+                                           value="#{msgUI['global.cancel']}"
+                                           position="top"/>
+                            </div>
+                            <div id="modal1"
+                                 class="modal">
+                                <div class="modal-content">
+                                    <h4 class="center-align">#{msgUI['deleteAdmin.confirm']}</h4>
+                                </div>
+                                <div class="modal-footer center-align footer-modal" >
+                                    <div class="col l3 offset-l3 offset-s3">
+                                        <p:commandLink class="iconheight green-text"
+                                                       id="check"
+                                                       ajax="false"
+                                                       action="#{administratorMB.delete()}">
+                                            <i class="fas fa-check-circle icon small"></i> 
+                                        </p:commandLink>
+                                    </div>
+                                    <div class="col l3">
+                                        <p:commandLink class="iconheight red-text modal-close"
+                                                       id="cancel">
+                                            <i class="fas fa-times-circle icon small"></i> 
+                                        </p:commandLink>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

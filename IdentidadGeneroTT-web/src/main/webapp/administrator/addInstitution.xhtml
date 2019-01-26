@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/TemplatePrincipal.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{msgUI['global.title']}"/>
+            </ui:define>
+            <ui:define name="content">
+                <h4 class="center-align title">
+                    <h:outputText value="#{msgUI['addInstitution.title']}" 
+                                  id="titulo" />
+                </h4>
+                <h:form id="formAdd">
+                    <p:messages id="globalMSG" 
+                                for="globalMSG"
+                                showDetail="true"
+                                closable="false"
+                                autoUpdate="false"/>
+                    <div class="row">
+                        <div class="col s12 l2 center-align">
+                            <i class="fas fa-user large grey-text"></i><br/>
+                            <span class="center-align">
+                                <p:commandLink value="#{msgUI['addInstitution.image']}"
+                                               class="a"/>
+                            </span>
+                        </div>
+                        <div class="col s12 l10 ">
+                            <p:fieldset legend="#{msgUI['addInstitution.fieldDatos']}">
+                                <div class="row">
+                                    <div class="input-field col l8">
+                                        <h:outputLabel for=":formAdd:name" 
+                                                       value="#{msgUI['addInstitution.name']}"
+                                                       styleClass="required"/>
+                                        <p:inputText id="name"
+                                                     value="#{institutionsMB.institutionDTO.entidad.nombre}"
+                                                     required="true"/>
+                                        <p:message for="name"/>
+                                    </div>
+                                    <div class="input-field col l4 ">
+                                        <h:outputLabel for=":formAdd:acronimo" 
+                                                       value="#{msgUI['addInstitution.acronimo']}" 
+                                                       styleClass="required"/>
+                                        <p:inputText id="acronimo" 
+                                                     required="true"
+                                                     value="#{institutionsMB.institutionDTO.entidad.acronimo}"/>
+                                        <p:message for="acronimo"/>
+
+                                    </div>
+                                    <div class="input-field col l6">
+                                        <h:outputLabel for=":formAdd:nameDirector" 
+                                                       value="#{msgUI['addInstitution.director']}"
+                                                       styleClass="required"/>
+                                        <p:inputText id="nameDirector"
+                                                     value="#{institutionsMB.institutionDTO.entidad.director}"
+                                                     required="true"/>
+                                        <p:message for="nameDirector"/>
+                                    </div>
+                                    <div class="input-field col l6">
+                                        <h:outputLabel for=":formAdd:mail" 
+                                                       styleClass="required"
+                                                       value="#{msgUI['addInstitution.mail']}"/>
+                                        <p:inputText id="mail"
+                                                     value="#{institutionsMB.institutionDTO.entidad.correoelectronico}"
+                                                     required="true">
+                                            <f:validateRegex 
+                                                pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                        </p:inputText>
+                                        <p:message for="mail" />
+                                    </div>
+                                    <div class="input-field col l6">
+                                        <h:outputLabel for=":formAdd:phone" 
+                                                       styleClass="required"
+                                                       value="#{msgUI['addInstitution.phone']}"/>
+                                        <p:inputText id="phone"
+                                                     required="true"
+                                                     value="#{institutionsMB.institutionDTO.entidad.telefono}"/>
+                                        <p:message for="phone"/>
+                                    </div>
+                                </div>
+                            </p:fieldset>
+
+                            <p:fieldset legend="#{msgUI['addInstitution.address']}">
+                                <div class="row">
+                                    <div class="input-field col l8">
+                                        <h:outputLabel for=":formAdd:addr" 
+                                                       value="#{msgUI['addInstitution.street']}"
+                                                       styleClass="required"/>
+                                        <p:inputText id="addr" 
+                                                     required="true"
+                                                     value="#{institutionsMB.institutionDTO.entidad.calle}"/>
+                                        <p:message for="addr"/>
+                                    </div>
+                                    <div class="input-field col l2">
+                                        <h:outputLabel for=":formAdd:numint" 
+                                                       value="#{msgUI['addInstitution.numint']}" />
+                                        <p:inputText id="numint"
+                                                     value="#{institutionsMB.institutionDTO.entidad.numInt}"/> 
+                                        <p:message for="numint"/>
+                                    </div>
+                                    <div class="input-field col l2">
+                                        <h:outputLabel for=":formAdd:numext" 
+                                                       value="#{msgUI['addInstitution.numext']}" />
+                                        <p:inputText id="numext"
+                                                     value="#{institutionsMB.institutionDTO.entidad.numExt}"/>
+                                        <p:message for="numext"/>
+                                    </div>
+                                    <div class="input-field col l5">
+                                        <h:outputLabel for=":formAdd:colonia" 
+                                                       value="#{msgUI['addInstitution.colonia']}"
+                                                       styleClass="required"/>
+                                        <p:inputText id="colonia"
+                                                     value="#{institutionsMB.institutionDTO.entidad.colonia}"
+                                                     required="true"/>
+                                        <p:message for="colonia"/>
+                                    </div>
+                                    <div class="input-field col l5">
+                                        <h:outputLabel for=":formAdd:delegacion" 
+                                                       value="#{msgUI['addInstitution.delegacion']}"
+                                                       styleClass="required"/>
+                                        <p:inputText id="delegacion"
+                                                     value="#{institutionsMB.institutionDTO.entidad.delegacion}"
+                                                     required="true"/>
+                                        <p:message for="delegacion"/>
+                                    </div>
+                                    <div class="input-field col l2">
+                                        <h:outputLabel for=":formAdd:cp" 
+                                                       value="#{msgUI['addInstitution.cp']}"
+                                                       styleClass="required"/>
+                                        <p:inputText id="cp"
+                                                     value="#{institutionsMB.institutionDTO.entidad.cp}"
+                                                     required="true"/>
+                                        <p:message for="cp"/>
+                                    </div>
+                                    <div class="input-field col l5">
+                                        <h:outputLabel for=":formAdd:estado" 
+                                                       value="#{msgUI['addInstitution.estado']}"
+                                                       styleClass="required"/>
+                                        <p:inputText id="estado"
+                                                     value="#{institutionsMB.institutionDTO.entidad.estado}"
+                                                     required="true"/>
+                                        <p:message for="estado"/>
+                                    </div>
+                                </div>
+                            </p:fieldset>
+
+                            <div class="row">
+                                <div class="col s12 l3 offset-l3 iconheight 
+                                     center-align childrenHeight">
+                                    <p:commandLink action="#{institutionsMB.add()}"
+                                                   class="black-text"
+                                                   ajax="false">
+                                        <i class="fas fa-save small icon"></i><br/>
+                                        #{msgUI['viewInstitutions.add']}
+                                    </p:commandLink>
+                                </div>
+                                <div class="col s12 l3  iconheight center-align childrenHeight">
+                                    <p:commandLink action="#{institutionsMB.back()}"
+                                                   class="black-text"
+                                                   ajax="false"
+                                                   immediate="true"
+                                                   >
+                                        <i class="fas fa-times small icon"></i><br/>
+                                    </p:commandLink>
+                                    #{msgUI['global.cancel']}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

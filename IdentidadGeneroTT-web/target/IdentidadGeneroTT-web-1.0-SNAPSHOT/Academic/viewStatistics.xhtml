@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/TemplatePrincipal.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{msgUI['global.title']}"/>
+            </ui:define>
+            <ui:define name="content">
+                <h4 class="center-align title">
+                    <h:outputText value="#{msgUI['viewStatistics.title']}" 
+                                  id="titulo" />
+                </h4>
+                <h:form id="formView">
+                    <div class="row">
+                        <div class="input-field col l8  s12 black-text">
+                            <h:selectOneMenu value = "#{chartView
+                                                        .cuestionarioDTO.entidad.id}"
+                                             rendered="#{not empty academicosMB
+                                                         .academicoDTO.entidad
+                                                         .idrepinstitucion.cuestionarioList}"> 
+                                <f:selectItems value="#{academicosMB
+                                                        .academicoDTO.entidad
+                                                        .idrepinstitucion.cuestionarioList}"
+                                               var="cuestionario"
+                                               itemLabel="#{cuestionario.nombre}"
+                                               itemValue="#{cuestionario.id}"/>
+                            </h:selectOneMenu> 	
+                        </div>
+                        <div class="col l4 s12">
+                            <p:commandLink update=":formView:panel"
+                                           class="waves-effect waves-light btn fullwidth tableicon"
+                                           id="VIEW"
+                                           actionListener="#{chartView.find()}">
+                                <h:outputText value="#{msgUI['viewStatistics.title']}"/>
+                                <i class="fas fa-check"></i>   
+                            </p:commandLink>
+                        </div>
+                    </div>
+                    <p:outputPanel id="panel">
+                        <div class="row nomargin">
+                            <div class="col l12 nomargin" >
+                                <iframe src="charts.xhtml"
+                                        frameborder="0" 
+                                        style="width: 100%; min-height: 700px; text-align: center!important">
+
+                                </iframe>
+                            </div>
+                        </div>
+                    </p:outputPanel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>
+

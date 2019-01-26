@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous" />
+        <h:outputStylesheet library="css" name="materialize.min.css"/>
+        <h:outputStylesheet library="css" name="csstemplate.css"/>
+        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+        <h:outputScript library="js" name="Chart.js" target="head"/>
+        <h:outputScript library="js" name="utils.js" target="head"/>
+        <title><ui:insert name="title">Template Principal</ui:insert></title>
+    </h:head>
+    <h:body>
+        <div id="navbar">
+            <ui:include src="navbar.xhtml" >
+            </ui:include>
+        </div>
+        <div class="contenedor">
+            <div class="row">
+                <div id="leftBar" class="col s2 m2 l1">
+                    <ui:include src="leftBar.xhtml">
+                    </ui:include>
+                </div>
+                <div id="content" class="col s10 m10 l11">
+                    <div class=" row  red darken-4 white-text center-align 
+                         overflow description">
+                        <div class="col l12" >
+                            #{msgUI['global.description']}
+                        </div>
+                    </div>
+                    <ui:insert name="content">
+                        Este es el contenido principal del Template
+                    </ui:insert>
+                </div>
+            </div>
+        </div>
+        <div id="bottom" class="row footer">
+            <div class="col s12 m12 l12 nomargin">
+                <ui:include src="footer.xhtml">
+                </ui:include>
+            </div>
+        </div>
+        <h:outputScript library="js" name="materialize.min.js"/>
+        <h:outputScript library="js" name="identidadGenero.js"/>
+    </h:body>
+</html>

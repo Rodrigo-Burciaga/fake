@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/TemplatePrincipal.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{msgUI['viewInstitutions.tooltip.view']}"/>
+            </ui:define>
+            <ui:define name="content">
+                <h4 class="center-align title">
+                    <h:outputText value="#{msgUI['detailInstitution.header']}"
+                                  id="header"/>
+                </h4>
+                <p:messages id="globalMSG" 
+                            for="globalMSG"
+                            showDetail="true"
+                            closable="false"/>
+                <div class="row">
+                    <div class="col l2 s12 center-align">
+                        <i class="fas fa-user large grey-text"></i>
+                    </div>
+                    <div class="col l10 s12 nomargin">
+                        <p:fieldset legend="#{msgUI['detailInstitution.fieldGeneral']}" 
+                                    class="table-cell">
+                            <h:dataTable value="#{institutionsMB.institutionDTO.entidad}"
+                                         styleClass="responsive-table nomargin highlight"
+                                         var="institucion">
+                                <h:column >
+                                    <f:facet name="header">
+                                        #{msgUI['detailInstitution.acronimo']}
+                                    </f:facet>
+                                    #{institucion.acronimo}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['detailInstitution.nombre']}
+                                    </f:facet>
+                                    #{institucion.nombre}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{msgUI['detailInstitution.correo']}"
+                                                      escape="false"/>
+                                    </f:facet>
+                                    <h:outputText value="#{institucion.correoelectronico}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['detailInstitution.phone']}
+                                    </f:facet>
+                                    #{institucion.telefono}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['detailInstitution.director']}
+                                    </f:facet>
+                                    #{institucion.director}
+                                </h:column>
+                            </h:dataTable>
+                        </p:fieldset>
+                        <p:fieldset legend="#{msgUI['detailInstitution.fieldAddress']}"
+                                    class="table-cell">
+                            <h:dataTable value="#{institutionsMB.institutionDTO.entidad}"
+                                         var="institucion"
+                                         styleClass="responsive-table nomargin">
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['detailInstitution.street']}
+                                    </f:facet>
+                                    #{institucion.calle}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['detailInstitution.numint']}
+                                    </f:facet>
+                                    #{empty institucion.numInt ? "s/n": institucion.numInt}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['detailInstitution.numext']}
+                                    </f:facet>
+                                    #{empty institucion.numExt ? "s/n": institucion.numInt}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['detailInstitution.col']}
+                                    </f:facet>
+                                    #{institucion.colonia}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['detailInstitution.del']}
+                                    </f:facet>
+                                    #{institucion.delegacion}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        #{msgUI['detailInstitution.estado']}
+                                    </f:facet>
+                                    #{institucion.estado}
+                                </h:column>
+                                <h:column >
+                                    <f:facet name="header">
+                                        <h:outputText escape="false" 
+                                                      value="#{msgUI['detailInstitution.cp']}"/>
+                                    </f:facet>
+                                    #{institucion.cp}
+                                </h:column>
+                            </h:dataTable>
+                        </p:fieldset> 
+                    </div>
+                </div>
+                <h:form id="formDetail">
+                    <div class="row">
+                        <div class="col l10 s12 offset-l2 center-align">
+                            <p:commandLink ajax="false"
+                                           action="#{institutionsMB.back()}"
+                                           class="iconheight black-text"
+                                           id="back">
+                                <i class="fas fa-arrow-circle-left icon small"></i>   
+                            </p:commandLink>
+                            <p:tooltip id="toolTipBack"
+                                       for="back"
+                                       value="#{msgUI['global.back']}"
+                                       position="top"/>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

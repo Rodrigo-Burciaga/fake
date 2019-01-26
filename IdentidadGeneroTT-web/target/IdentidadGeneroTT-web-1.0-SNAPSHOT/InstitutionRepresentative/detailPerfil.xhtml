@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/TemplatePrincipal.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{msgUI['detailRep.title']}" />
+            </ui:define>
+            <ui:define name="content">
+                <h4 class="center-align title">
+                    <h:outputText value="#{msgUI['detailRep.title']}" 
+                                  id="titulo" />
+                </h4>
+                <h:form>
+                    <p:messages id="globalMSG" 
+                                for="globalMSG"
+                                showDetail="true"
+                                closable="false"/> 
+                    <div class="row">
+                        <div class="col s12 l9 offset-l1">
+                            <div class="card horizontal hoverable">
+                                <div class="card-image">
+                                    <img src="../resources/images/user.png" />
+                                </div>
+                                <div class="card-stacked">
+                                    <ul class="collection nomargin" >
+                                        <li class="collection-item">
+                                            <b class="twoDots">
+                                                <h:outputText value="#{msgUI['detailRep.name']}"/>
+                                            </b>
+                                            <h:outputText value="#{representanteMB
+                                                                   .representanteInstitucionDTO
+                                                                   .entidad.nombre} " />
+                                            <h:outputText value="#{representanteMB
+                                                                   .representanteInstitucionDTO
+                                                                   .entidad.apellido1} "/>
+                                            <h:outputText value="#{representanteMB
+                                                                   .representanteInstitucionDTO
+                                                                   .entidad.apellido2}"/>
+                                        </li>
+                                        <li class="collection-item">
+                                            <b class="twoDots">
+                                                <h:outputText value="#{msgUI['detailRep.noEmp']}"/>
+                                            </b>
+                                            <h:outputText value="#{representanteMB
+                                                                   .representanteInstitucionDTO
+                                                                   .entidad.numeroempleado}"/>
+                                        </li>
+                                        <li class="collection-item">
+                                            <b class="twoDots">
+                                                <h:outputText value="#{msgUI['detailRep.phone']}"/>
+                                            </b>
+                                            <h:outputText value="#{representanteMB
+                                                                   .representanteInstitucionDTO
+                                                                   .entidad.telefono}"/>
+                                        </li>
+                                        <li class="collection-item">
+                                            <b class="twoDots">
+                                                <h:outputText value="#{msgUI['detailRep.mail']}"/>
+                                            </b>
+                                            <h:outputText value="#{representanteMB
+                                                                   .representanteInstitucionDTO
+                                                                   .entidad.correoelectronico}"/>
+                                        </li>
+                                        <li class="collection-item">
+                                            <b class="twoDots">
+                                                <h:outputText value="#{msgUI['detailRep.dateIn']}"/>
+                                            </b>
+                                            <h:outputText value="#{representanteMB
+                                                                   .representanteInstitucionDTO
+                                                                   .entidad.fechainicio}"/>
+                                        </li>
+                                        <li class="collection-item">
+                                            <b class="twoDots">
+                                                <h:outputText value="#{msgUI['detailRep.user']}"/>
+                                            </b>
+                                            <h:outputText value="#{representanteMB
+                                                                   .representanteInstitucionDTO
+                                                                   .entidad.usuario}"/>
+                                        </li>
+                                        <h:panelGroup layout="block" 
+                                                      rendered="#{not empty
+                                                                  representanteMB
+                                                                  .representanteInstitucionDTO
+                                                                  .entidad.fechafin}">
+                                            <li class="collection-item">
+                                                <b class="twoDots">
+                                                    <h:outputText value="#{msgUI['detailRep.dateOff']}"/>
+                                                </b>
+                                                <h:outputText value="#{representanteMB
+                                                                       .representanteInstitucionDTO
+                                                                       .entidad.fechafin}"/>
+                                            </li>
+                                        </h:panelGroup>
+                                        <li class="collection-item">
+                                            <b class="twoDots">
+                                                <h:outputText value="#{msgUI['detailRep.inst']}"/>
+                                            </b>
+                                            <h:outputText value="#{representanteMB
+                                                                   .representanteInstitucionDTO
+                                                                   .entidad.idinstitucion.acronimo}"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 l12 center-align">
+                            <p:commandLink action="#{representanteMB.prepareUpdate()}"
+                                           class="black-text"
+                                           ajax="false"
+                                           id="back"
+                                           immediate="true">
+                                <i class="fas fa-pencil-alt icon small"></i>
+                            </p:commandLink>
+                            <p:tooltip value="#{msgUI['viewReps.toolTipEdit']}"
+                                       for="back"
+                                       id="toolTipBack"
+                                       position="top"/>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

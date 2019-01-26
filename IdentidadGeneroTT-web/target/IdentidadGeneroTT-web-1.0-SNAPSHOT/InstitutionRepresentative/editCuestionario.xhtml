@@ -1,0 +1,298 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/TemplatePrincipal.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{msgUI['editCuestionario.title']}"/>
+            </ui:define>
+            <ui:define name="content">
+                <h4 class="center-align title">
+                    <h:outputText value="#{msgUI['editCuestionario.title']}" 
+                                  id="titulo" />
+                </h4>
+                <h:form id="formAdd">
+                    <p:messages id="globalMSG" 
+                                for="globalMSG"
+                                showDetail="true"
+                                closable="false"/> 
+                    <div class="row">
+                        <p:fieldset legend="#{msgUI['detailQuestionary.questionary']}">
+                            <ul class="collection hoverable">
+                                <li class="collection-item avatar">
+                                    <div class="input-field col l12">
+                                        <h:outputLabel for=":formAdd:name" 
+                                                       value="#{msgUI['addQuestionary.name']}"
+                                                       styleClass="required"/>
+                                        <p:inputText id="name"
+                                                     value="#{representanteMB
+                                                              .representanteInstitucionDTO
+                                                              .cuestionario.nombre}"/>
+                                        <p:message for="name"/>
+                                    </div>
+                                </li>
+                                <h:panelGroup layout="block"
+                                              id="pregunta">
+                                    <ui:repeat value="#{representanteMB
+                                                        .representanteInstitucionDTO
+                                                        .cuestionario.categoriaList}"
+                                               var="categoria">
+                                        <li class="collection-item avatar">
+                                            <div class="input-field col l10 ">
+                                                <h:outputLabel for="category" 
+                                                               value="#{msgUI['detailQuestionary.category']}"
+                                                               styleClass="required"/>
+                                                <p:inputText id="category"
+                                                             value="#{categoria.nombre}"/>
+                                                <p:message for="category"/>
+                                            </div>
+                                            <div class="col l1 tableicon2 center-align">
+                                                <p:commandLink actionListener="#{representanteMB
+                                                                                 .removeCategory(categoria.id,
+                                                                                 categoria.nombre)}"
+                                                               update=":formAdd:pregunta 
+                                                               :formAdd:globalMSG"
+                                                               class="black-text"
+                                                               ajax="false"
+                                                               oncomplete="$('html, body').animate({scrollTop: 0}, 'fast');"
+                                                               id="delete">
+                                                    <i class="fas fa-trash-alt small icon"></i>
+                                                </p:commandLink>
+                                                <p:tooltip value="#{msgUI['deleteCuestionario.category']}"
+                                                           for="delete"
+                                                           id="toolTipDelete"
+                                                           position="top"/>
+                                            </div>
+                                            <div class="col l1 tableicon2">
+                                                <p:commandLink actionListener="#{representanteMB
+                                                                                 .addSection(
+                                                                                 categoria.id,
+                                                                                 categoria.nombre)}"
+                                                               update=":formAdd:pregunta 
+                                                               :formAdd:globalMSG"
+                                                               ajax="false"
+                                                               class="black-text"
+                                                               id="addSection">
+                                                    <i class="fas fa-plus-circle small icon"></i>
+                                                </p:commandLink>
+                                                <p:tooltip value="#{msgUI['addQuestionary.addSection']}"
+                                                           for="addSection"
+                                                           id="toolTipAddSection"
+                                                           position="top"/>
+                                            </div>                                            
+                                            <ui:repeat value="#{categoria.seccionList}"
+                                                       var="seccion">
+                                                <div class="row nomargin">
+                                                    <div class="col l9  offset-l1 input-field ">
+                                                        <h:outputLabel for="section" 
+                                                                       value="#{msgUI['detailQuestionary.section']}"
+                                                                       styleClass="required"/>
+                                                        <p:inputText id="section"
+                                                                     value="#{seccion.nombre}"/>
+                                                        <p:message for="section"/>
+                                                    </div> 
+                                                    <div class="col l1 tableicon2 center-align">
+                                                        <p:commandLink actionListener="#{representanteMB
+                                                                                         .removeSection(
+                                                                                         categoria.id,
+                                                                                         seccion.id,
+                                                                                         seccion.nombre,
+                                                                                         categoria.nombre)}"
+                                                                       update=":formAdd:pregunta 
+                                                                       :formAdd:globalMSG"
+                                                                       ajax="false"
+                                                                       class="black-text"
+                                                                       id="delete1">
+                                                            <p:tooltip value="#{msgUI['deleteCuestionario.section']}"
+                                                                       for="delete1"
+                                                                       id="toolTipDelete1"
+                                                                       position="top"/>
+                                                            <i class="fas fa-trash-alt small icon"></i>
+                                                        </p:commandLink>
+                                                    </div>
+                                                    <div class="col l1 tableicon2">
+                                                        <p:commandLink actionListener="#{representanteMB
+                                                                                         .addQuestion(categoria.id,
+                                                                                         seccion.id,
+                                                                                         categoria.nombre,
+                                                                                         seccion.nombre)}"
+                                                                       update=":formAdd:pregunta 
+                                                                       :formAdd:globalMSG"
+                                                                       ajax="false"
+                                                                       class="black-text"
+                                                                       id="addQues">
+                                                            <i class="fas fa-plus-circle small icon"></i>
+                                                        </p:commandLink>
+                                                        <p:tooltip value="#{msgUI['addQuestionary.addQuestion']}"
+                                                                   for="addQues"
+                                                                   id="toolTipAddQues"
+                                                                   position="top"/>
+                                                    </div>
+                                                    <ui:repeat value="#{seccion.preguntaList}"
+                                                               var="pregunta">
+                                                        <div class="row ">
+                                                            <div class="input-field  col l8  offset-l2 ">
+                                                                <h:outputLabel for="question" 
+                                                                               value="#{msgUI['detailQuestionary.question']}"
+                                                                               styleClass="required"/>
+                                                                <p:inputText id="question"
+                                                                             value="#{pregunta.pregunta}"/>
+                                                                <p:message for="question"/>
+                                                            </div>
+                                                            <div class="col l1 tableicon2 center-align">
+                                                                <p:commandLink actionListener="#{representanteMB
+                                                                                                 .removeQuestion(categoria.id,
+                                                                                                 seccion.id,
+                                                                                                 pregunta.id,
+                                                                                                 seccion.nombre,
+                                                                                                 categoria.nombre,
+                                                                                                 pregunta.pregunta)}"
+                                                                               update=":formAdd:pregunta 
+                                                                               :formAdd:globalMSG"
+                                                                               ajax="false"
+                                                                               class="black-text"
+                                                                               id="delete2">
+                                                                    <i class="fas fa-trash-alt small icon"></i>
+                                                                </p:commandLink>
+                                                                <p:tooltip value="#{msgUI['deleteCuestionario.question']}"
+                                                                           for="delete2"
+                                                                           id="toolTipDelete2"
+                                                                           position="top"/>
+                                                            </div>
+                                                            <div class="col l1 tableicon2">
+                                                                <p:commandLink actionListener="#{representanteMB
+                                                                                                 .addOption(
+                                                                                                 categoria.id,
+                                                                                                 seccion.id,
+                                                                                                 pregunta.id,
+                                                                                                 categoria.nombre,
+                                                                                                 seccion.nombre,
+                                                                                                 pregunta.pregunta)}"
+                                                                               update=":formAdd:pregunta 
+                                                                               :formAdd:globalMSG"
+                                                                               ajax="false"
+                                                                               class="black-text"
+                                                                               id="addOpt">
+                                                                    <i class="fas fa-plus-circle small icon"></i>
+                                                                </p:commandLink>
+                                                                <p:tooltip value="#{msgUI['addQuestionary.addOption']}"
+                                                                           for="addOpt"
+                                                                           id="toolTipAddOpt"
+                                                                           position="top"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col l10  offset-l2">
+                                                            <h:selectOneRadio value = "#{pregunta.idtipo.id}"
+                                                                              class="col l4"> 
+                                                                <f:selectItems value="#{catalogMB.tipos}"
+                                                                               var="tipo"
+                                                                               itemLabel="#{tipo.entidad.nombre}"
+                                                                               itemValue="#{tipo.entidad.id}"/>
+                                                            </h:selectOneRadio>  
+                                                        </div>
+                                                        <ui:repeat value="#{pregunta.opcionRespuestaList}"
+                                                                   var="opcionRespuesta">
+                                                            <div class="input-field col l8 offset-l3">
+                                                                <h:outputLabel for="option" 
+                                                                               value="#{msgUI['detailQuestionary.answer']}"
+                                                                               styleClass="required"/>
+                                                                <p:inputText id="option"
+                                                                             value="#{opcionRespuesta.opcion}"/>
+                                                                <p:message for="option"/>
+                                                            </div>
+                                                            <div class="col l1 tableicon2">
+                                                                <p:commandLink actionListener="#{representanteMB
+                                                                                                 .removeOption(categoria.id,
+                                                                                                 seccion.id,
+                                                                                                 pregunta.id,
+                                                                                                 opcionRespuesta.id,
+                                                                                                 seccion.nombre,
+                                                                                                 categoria.nombre,
+                                                                                                 pregunta.pregunta,
+                                                                                                 opcionRespuesta.opcion)}"
+                                                                               update="formAdd:pregunta 
+                                                                               :formAdd:globalMSG"
+                                                                               class="black-text"
+                                                                               ajax="false"
+                                                                               id="delete3">
+                                                                    <i class="fas fa-trash-alt small icon"></i>
+                                                                </p:commandLink>
+                                                                <p:tooltip value="#{msgUI['deleteCuestionario.option']}"
+                                                                           for="delete3"
+                                                                           id="toolTipDelete3"
+                                                                           position="top"/>
+                                                            </div>
+                                                            <div class="col l8 offset-l4">
+                                                                <ui:repeat value="#{opcionRespuesta.puntuacionList}"
+                                                                           var="puntuacion">
+                                                                    <div class="col l6">
+                                                                        <h:outputText value="#{representanteMB
+                                                                                               .probarGenero(puntuacion.idgenero.id)}" />
+                                                                        <p:rating value="#{puntuacion.puntuacion}"
+                                                                                  style="display: inline-block!important"/>
+                                                                    </div>
+                                                                </ui:repeat>
+                                                            </div>
+                                                        </ui:repeat>
+                                                    </ui:repeat>
+                                                </div>
+                                            </ui:repeat>
+                                        </li>
+                                    </ui:repeat>
+                                </h:panelGroup>
+                            </ul>
+                        </p:fieldset>
+                    </div>
+                    <div class="fixed-action-btn">
+                        <p:commandLink class="btn-floating btn-large waves-effect 
+                                       waves-light  indigo pulse"
+                                       id="add"
+                                       actionListener="#{representanteMB.addCategory()}"
+                                       update="pregunta"
+                                       ajax="false">
+                            <i class="fas fa-plus small "></i>
+                        </p:commandLink>
+                        <p:tooltip id="toolTipAdd"
+                                   for="add"
+                                   position="top"
+                                   value="#{msgUI['addQuestionary.addCategory']}"/>
+                    </div>
+                    <div class="row">
+                        <div class="col l2 s12  offset-l4 center-align">
+                            <p:commandLink ajax="false"
+                                           action="#{representanteMB.updateCuestionario()}"
+                                           class="iconheight black-text"
+                                           id="save">
+                                <i class="fas fa-save icon small"></i>   
+                            </p:commandLink>
+                            <p:tooltip id="toolTipSave"
+                                       for="save"
+                                       value="#{msgUI['global.save']}"
+                                       position="top"/>
+                        </div>
+                        <div class="col l2">
+                            <p:commandLink ajax="false"
+                                           action="#{representanteMB.backQuestionaries()}"
+                                           class="iconheight black-text"
+                                           id="back">
+                                <i class="fas fa-times icon small"></i>   
+                            </p:commandLink>
+                            <p:tooltip id="toolTipBack"
+                                       for="back"
+                                       value="#{msgUI['global.cancel']}"
+                                       position="top"/>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

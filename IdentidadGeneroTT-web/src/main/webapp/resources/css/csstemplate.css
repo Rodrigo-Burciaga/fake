@@ -1,0 +1,160 @@
+@font-face{
+    font-family: Roboto;
+    src: url("#{resource['fonts/Roboto/Roboto-Regular.ttf']}");
+}
+body{
+    font-family: Roboto!important;
+}
+.logo-img {
+    max-height: 60px!important;
+}
+.divition{
+    width: 99%!important;
+    height: 1.2px;
+    border-color: transparent;
+    margin-top: 0px;
+}
+.divition2{
+    margin-top: 20px!important;
+}
+@media only screen and (max-width: 600px) {
+    .logo-img{
+        max-height: 50px!important;
+    }
+    #formLeftBar\:sidebar{
+        width: 75% !important;
+    }
+    .title{
+        font-size: 18px;
+    }
+    .description{
+        height: 50px!important;
+    }
+    .empty{
+        font-size: 1em !important;
+    }
+    .waves-effect.waves-light.btn{
+        margin-bottom: .5em;
+    }
+}
+.menuIcon{
+    display: inline-block;
+    height: 30px;
+}
+.contenedor{
+    padding: 10px 25px 10px;
+}
+.sidebar{
+    width: 25%!important; 
+    overflow: auto;
+}
+.completeWidth{
+    width: 100%!important;
+}
+.activo{
+    background-color: #90caf9!important;
+}
+.closeBtn{
+    position: absolute!important;
+    top: 10px;
+    right: 25px;
+    margin-left: 0px;
+}
+.select-dropdown{
+    text-align: center;
+}
+.input-field.col.s12{
+    margin: 0px;
+    padding: 0px;
+} 
+.icon:hover{
+    color: #42a5f5!important;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.icon{
+    padding-top: 7px;
+    transition: all .2s ease-in-out;
+}
+.iconheight{
+    height: 2.3rem!important;
+}
+.childrenHeight{
+    display: table;
+}
+.fullwidth{
+    width: 100%!important;
+}
+.overflow{
+    overflow: auto;
+}
+.description{
+    height: 30px;
+    padding-top: 5px;
+}
+.footer{
+    margin: 0!important;
+    padding: 0!important;
+    min-height: 20vh;
+}
+.nomargin{
+    margin: 0!important;
+    padding: 0!important;
+}
+body .contenedor{
+    min-height: 70vh;
+}
+.bar{
+    margin-bottom: 0; 
+    height: 3vh
+}
+.required::before{
+    content: "* ";
+}
+.title{
+    color: #b71c1c;
+}
+.a{
+    text-decoration: underline;
+}
+.table-cell{
+    display: table-cell;
+}
+.word{
+    word-wrap: break-word!important;
+}
+.empty{
+    color: #b71c1c;
+    font-size: 1.5em;
+    display: inline-block;
+    width: 100%;
+}
+.footer-modal{
+    text-align: center!important;
+}
+.tableicon{
+    margin-top: 10px;
+}
+.tableicon2{
+    margin-top: 20px!important;
+}
+.hr{
+    color: #fafafa;
+    margin-top: 1.5em;
+}
+span.title::after, .twoDots::after{
+    content: ": ";
+}
+.padSection{
+    padding-left: 1.3em;
+}
+.padQuestion{
+    padding-left: 2.6em;
+}
+.padOption{
+    padding-left: 3.9em;
+}
+.csesion{
+    bottom: 7.5em!important;
+    position: fixed;
+}

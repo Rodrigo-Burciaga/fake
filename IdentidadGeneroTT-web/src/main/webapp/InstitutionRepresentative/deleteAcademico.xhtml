@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/TemplatePrincipal.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{msgUI['global.title']}"/>
+            </ui:define>
+            <ui:define name="content">
+                <h4 class="center-align title">
+                    <h:outputText value="#{msgUI['deleteAcademico.title']}" 
+                                  id="titulo" />
+                </h4>
+                <h:form id="formAdd">
+                    <div class="row">
+                        <div class="col s12 l2 center-align">
+                            <i class="fas fa-user large grey-text"></i><br/>
+                        </div>
+                        <div class="col s12 l10 ">
+                            <div class="row">
+                                <div class="input-field col l8">
+                                    <h:outputLabel for=":formAdd:name" 
+                                                   value="#{msgUI['deleteAcademico.name']}"/>
+                                    <p:inputText id="name"/>
+                                </div>
+                                <div class="input-field col l4 ">
+                                    <h:outputLabel for=":formAdd:user" 
+                                                   value="#{msgUI['deleteAcademico.user']}" />
+                                    <p:inputText id="user" required="true" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col l8">
+                                    <h:outputLabel for=":formAdd:addr" 
+                                                   value="#{msgUI['deleteAcademico.address']}"/>
+                                    <p:inputText id="addr" />
+                                </div>
+                                <div class="input-field col l4">
+                                    <h:outputLabel for=":formAdd:pass" 
+                                                   value="#{msgUI['deleteAcademico.pass']}" />
+                                    <p:inputText id="pass"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col l4">
+                                    <h:outputLabel for=":formAdd:phone" 
+                                                   value="#{msgUI['deleteAcademico.phone']}"/>
+                                    <p:inputText id="phone"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col l4">
+                                    <h:outputLabel for=":formAdd:mail" 
+                                                   value="#{msgUI['deleteAcademico.mail']}"/>
+                                    <p:inputText id="mail"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col l4">
+                                    <h:outputLabel for=":formAdd:employee" 
+                                                   value="#{msgUI['deleteAcademico.employee']}"/>
+                                    <p:inputText id="employee"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s3 l3">
+                                </div>
+                                <div class="col s12 l3  iconheight center-align childrenHeight">
+                                    <i class="fas fa-save small icon"></i><br/>
+                                    #{msgUI['deleteAcademico.delete']}
+                                </div>
+                                <div class="col s12 l3  iconheight center-align childrenHeight">
+                                    <p:commandLink action="#{academicosMB.back()}"
+                                                   class="black-text"
+                                                   ajax="false"
+                                                   immediate="true">
+                                        <i class="fas fa-times small icon"></i><br/>
+                                    </p:commandLink>
+                                    #{msgUI['global.cancel']}
+                                </div>
+                                <div class="col s3 l3 ">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

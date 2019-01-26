@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/TemplatePrincipal.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{msgUI['addQuestionary.title']}"/>
+            </ui:define>
+            <ui:define name="content">
+                <h4 class="center-align title">
+                    <h:outputText value="#{msgUI['addQuestionary.title']}" 
+                                  id="titulo" />
+                </h4>
+                <h:form id="formAdd">
+                    <p:messages id="globalMSG" 
+                                for="globalMSG"
+                                showDetail="true"
+                                closable="false"/> 
+                    <div class="row">
+                        <div class="input-field col l12">
+                            <h:outputLabel for=":formAdd:name" 
+                                           value="#{msgUI['addQuestionary.name']}"
+                                           styleClass="required"/>
+                            <p:inputText id="name"
+                                         value="#{questionariesMB.questionaryDTO
+                                                  .nombreCuestinario}"/>
+                            <p:message for="name"/>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col l4 offset-l3">
+                                <h:outputLabel for=":formAdd:nCategory" 
+                                               value="#{msgUI['addQuestionary.newCategory']}"/>
+                                <p:inputText id="nCategory"
+                                             value="#{questionariesMB.questionaryDTO.nombreCategoria}"
+                                             immediate="false"/>
+                                <p:message for="nCategory" id="nCategoryMSG"/>
+                            </div>
+                            <div class="input-field col l3">
+                                <p:commandLink class="waves-effect waves-light btn 
+                                               fullwidth tableicon"
+                                               value="#{msgUI['addQuestionary.addCategory']}"
+                                               actionListener="#{questionariesMB.addCategory()}"
+                                               ajax="false">
+
+                                </p:commandLink>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col l4 offset-l3">
+                                <h:outputLabel for=":formAdd:nSection" 
+                                               value="#{msgUI['addQuestionary.newSection']}"/>
+                                <p:inputText id="nSection"
+                                             value="#{questionariesMB.questionaryDTO.nombreSeccion}"/>
+                                <p:message for="nSection"/>
+                            </div>
+                            <div class="input-field col l3">
+                                <p:commandLink class="waves-effect waves-light btn 
+                                               fullwidth tableicon"
+                                               value="#{msgUI['addQuestionary.addSection']}"
+                                               actionListener="#{questionariesMB.addSection()}"
+                                               ajax="false"/>
+                            </div>
+                        </div>
+                    </div>
+                    <h:panelGroup layout="block"
+                                  id="pregunta">
+                        <ui:repeat value="#{questionariesMB.questionaryDTO.questionsDTO}"
+                                   var="question">
+                            <p:fieldset legend="#{msgUI['addQuestionary.question']+= question.id}"
+                                        class="hoverable" >
+                                <div class="row">
+                                    <div class="col s12 l6 offset-l3 ">
+                                        <p:inputText value="#{question.entidad.pregunta}"/>
+                                    </div>
+                                    <div class="col l1 s12 tableicon center-align">
+                                        <p:commandLink class="black-text iconheight"
+                                                       id="addOption"
+                                                       actionListener="#{questionariesMB.addOption(question)}"
+                                                       update=":formAdd:pregunta">
+                                            <i class="fas fa-plus-circle icon small "></i>
+                                        </p:commandLink>
+                                        <p:tooltip id="toolTipAddOption"
+                                                   for="addOption"
+                                                   value="#{msgUI['addQuestionary.addOption']}"
+                                                   position="top"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12 l5 offset-l1">
+                                        <h:selectOneMenu value="#{question.categoriaSelected}"
+                                                         class="browser-default"
+                                                         id="selecteeee">
+                                            <c:if test="#{empty questionariesMB
+                                                          .questionaryDTO.categorias}">
+                                                <f:selectItem itemLabel="#{msgUI['global.empty']}"
+                                                              itemDisabled="true"/>
+                                            </c:if>
+                                            <c:if test="#{not empty questionariesMB
+                                                          .questionaryDTO.categorias}">
+                                                <f:selectItem itemLabel="#{msgUI['addQuestionary.category']}"
+                                                              itemDisabled="true"/>
+                                            </c:if>
+                                            <f:selectItems value="#{questionariesMB
+                                                                    .questionaryDTO.categorias}"
+                                                           var="categoria"
+                                                           itemLabel="#{categoria.entidad.nombre}"
+                                                           itemValue="#{categoria.entidad.nombre}"
+                                                           id="items"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="col s12 l5">
+                                        <h:selectOneMenu id="select1"
+                                                         class="browser-default"
+                                                         value="#{question.seccionSelected}">
+                                            <c:if test="#{empty questionariesMB.questionaryDTO.secciones}">
+                                                <f:selectItem itemLabel="#{msgUI['global.empty']}"
+                                                              itemDisabled="true"/>
+                                            </c:if>
+                                            <c:if test="#{not empty questionariesMB.questionaryDTO.secciones}">
+                                                <f:selectItem itemLabel="#{msgUI['addQuestionary.section']}"
+                                                              itemDisabled="true"/>
+                                            </c:if>
+                                            <f:selectItems value="#{questionariesMB
+                                                                    .questionaryDTO.secciones}"
+                                                           var="seccion"
+                                                           itemLabel="#{seccion.entidad.nombre}"
+                                                           itemValue="#{seccion.entidad.nombre}"
+                                                           id="items1"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col l2 tableicon">
+                                        <h6>
+                                            <h:outputText value="#{msgUI['addQuestionary.tipoPregunta']}" />
+                                        </h6>
+                                    </div>
+                                    <h:selectOneRadio value = "#{question.idTipo}"
+                                                      class="col l4"> 
+                                        <f:selectItems value="#{catalogMB.tipos}"
+                                                       var="tipo"
+                                                       itemLabel="#{tipo.entidad.nombre}"
+                                                       itemValue="#{tipo.entidad.id}"/>
+                                    </h:selectOneRadio>  
+                                </div>
+                                <ui:repeat value="#{question.opcionRespuestaDTO}"
+                                           var="opcionRespuestaDTO">
+                                    <div class="row nomargin">
+                                        <p:inputText class="col l3"
+                                                     value="#{opcionRespuestaDTO.entidad.opcion}"/>
+                                        <p:tooltip id="toolTipRemoveOption"
+                                                   for="removeOption"
+                                                   value="#{msgUI['global.delete']}"
+                                                   position="top"/>
+                                        <div class="col l2 tableicon2">
+                                            <h:outputText value="#{msgUI['addQuestionary.rateM']}"/>
+                                        </div>
+                                        <p:rating value="#{opcionRespuestaDTO.ratingM}"
+                                                  class="col l2 tableicon2"/>
+                                        <div class="col l2 tableicon2">
+                                            <h:outputText value="#{msgUI['addQuestionary.rateF']}"/>
+
+                                        </div>
+                                        <p:rating value="#{opcionRespuestaDTO.ratingF}"
+                                                  class="col l2 tableicon2"/>
+                                        <p:commandLink class="iconheight col l1 
+                                                       center-align black-text tableicon"
+                                                       id="removeOption"
+                                                       actionListener="#{questionariesMB
+                                                                         .removeOption(opcionRespuestaDTO, question)}"
+                                                       update=":formAdd:pregunta">
+                                            <i class="fas fa-trash-alt icon small "></i>
+                                        </p:commandLink>
+                                    </div>
+                                </ui:repeat>
+
+                                <div class="row right-align">
+                                    <hr class="hr"/>
+                                    <p:commandLink actionListener="#{questionariesMB.removeQuestion(question)}"
+                                                   update=":formAdd:pregunta"
+                                                   class="black-text"
+                                                   id="delete">
+                                        <i class="fas fa-trash-alt small icon"></i>
+                                    </p:commandLink>
+                                    <p:tooltip id="toolTipAdd"
+                                               for="delete"
+                                               position="top"
+                                               value="#{msgUI['global.delete']}"/>
+                                </div>
+                            </p:fieldset>
+                        </ui:repeat>
+                    </h:panelGroup>
+                    <div class="fixed-action-btn">
+                        <p:commandLink class="btn-floating btn-large waves-effect 
+                                       waves-light  indigo pulse"
+                                       id="add"
+                                       actionListener="#{questionariesMB.addQuestion()}"
+                                       update="pregunta :formAdd:globalMSG">
+                            <i class="fas fa-plus small "></i>
+                        </p:commandLink>
+                        <p:tooltip id="toolTipAdd"
+                                   for="add"
+                                   position="top"
+                                   value="#{msgUI['addQuestionary.addQuestion']}"/>
+                    </div>
+                    <div class="row">
+                        <div class="col l12 center-align tableicon2">
+                            <p:commandLink class="btn waves-effect waves-light "
+                                           action="#{questionariesMB.add()}"
+                                           update=":formAdd:globalMSG"
+                                           ajax="false"
+                                           oncomplete="$('html, body').animate({scrollTop: 0}, 'fast');">
+                                <h:outputText value="#{msgUI['addQuestionary.save']}"/>
+                                <i class="fas fa-plus "></i>
+                            </p:commandLink>
+                        </div>
+                        <div class="col s12 m12 l12 center-align iconheigh tableicon2">
+                            <p:commandLink action="#{questionariesMB.back()}"
+                                           class="black-text"
+                                           ajax="false"
+                                           id="cancel">
+                                <i class="fas fa-times-circle icon small"></i>
+                            </p:commandLink>
+                            <p:tooltip value="#{msgUI['global.cancel']}"
+                                       for="cancel"
+                                       id="toolTipCancel"
+                                       position="top"/>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/TemplatePrincipal.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{msgUI['detailQuestionary.title']}"/>
+            </ui:define>
+            <ui:define name="content">
+                <h4 class="center-align title">
+                    <h:outputText value="#{msgUI['detailQuestionary.title']}" 
+                                  id="titulo" />
+                </h4>
+                <h:form id="formDetail">
+                    <div class="row">
+                        <p:fieldset legend="#{msgUI['detailQuestionary.questionary']}">
+                            <ul class="collection hoverable">
+                                <li class="collection-item avatar">
+                                    <span class="title">
+                                        <h:outputText value="#{msgUI['detailQuestionary.name']}"/>
+                                    </span>
+                                    <h:outputText value="#{representanteMB
+                                                           .representanteInstitucionDTO
+                                                           .cuestionario.nombre}"/>
+                                </li>
+                                <ui:repeat value="#{representanteMB
+                                                    .representanteInstitucionDTO
+                                                    .cuestionario.categoriaList}"
+                                           var="categoria">
+                                    <li class="collection-item avatar">
+                                        <span class="title">
+                                            <h:outputText value="#{msgUI['detailQuestionary.category']}"/>
+                                        </span>
+                                        <h:outputText value="#{categoria.nombre}"/>
+                                        <br/>
+                                        <ui:repeat value="#{categoria.seccionList}"
+                                                   var="seccion">
+                                            <span class="title padSection">
+                                                <h:outputText value="#{msgUI['detailQuestionary.section']}"/>
+                                            </span>
+                                            <h:outputText value="#{seccion.nombre}"/>
+                                            <br/>
+                                            <ui:repeat value="#{seccion.preguntaList}"
+                                                       var="pregunta">
+                                                <span class="title padQuestion ">
+                                                    <h:outputText value="#{msgUI['detailQuestionary.question']}"/>
+                                                </span>
+                                                <h:outputText value="#{pregunta.pregunta}"/>
+                                                <span class="title padQuestion">
+                                                    <h:outputText value="#{msgUI['detailQuestionary.qTipe']}"/>
+                                                </span>
+                                                <h:outputText value="#{pregunta.idtipo.nombre}"/>
+                                                <br/>
+                                                <ui:repeat value="#{pregunta.opcionRespuestaList}"
+                                                           var="opcionRespuesta">
+                                                    <div class="row nomargin">
+                                                        <div class="col l4 nomargin">
+                                                            <span class="title padOption">
+                                                                <h:outputText value="#{msgUI['detailQuestionary.answer']}"/>
+                                                            </span>
+                                                            <h:outputText value="#{opcionRespuesta.opcion}"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <ui:repeat value="#{opcionRespuesta.puntuacionList}"
+                                                                   var="puntuacion">
+                                                            <div class="col l6">
+                                                                <span class="title padOption">
+                                                                    #{representanteMB
+                                                                      .probarGenero(puntuacion.idgenero.id)} 
+                                                                </span>
+                                                                <p:rating readonly="true"
+                                                                          value="#{puntuacion.puntuacion}"
+                                                                          style="display: inline-block!important"/>
+                                                            </div>
+                                                        </ui:repeat>
+                                                    </div>
+                                                </ui:repeat>
+                                                <br/>
+                                            </ui:repeat>
+                                        </ui:repeat>
+                                    </li>
+                                </ui:repeat>
+                            </ul>
+                        </p:fieldset>
+                    </div>
+                    <div class="row">
+                        <div class="col l12 s12  center-align">
+                            <p:commandLink ajax="false"
+                                           action="#{representanteMB.backQuestionaries()}"
+                                           class="iconheight black-text"
+                                           id="back">
+                                <i class="fas fa-arrow-circle-left icon small"></i>   
+                            </p:commandLink>
+                            <p:tooltip id="toolTipBack"
+                                       for="back"
+                                       value="#{msgUI['global.back']}"
+                                       position="top"/>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
